@@ -4,7 +4,9 @@ const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    console.log(req.user);
+
+    return res.redirect("/feed");
   }
   res.render("login", {
     title: "Login",
@@ -39,7 +41,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+      res.redirect(req.session.returnTo || "/feed"); //when they log in we send them to the feed page here
     });
   })(req, res, next);
 };

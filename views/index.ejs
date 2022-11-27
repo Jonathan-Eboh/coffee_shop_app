@@ -1,11 +1,71 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
-</main>
-    
+    <main class="container">
+        <div class="row justify-content-around mt-5">
+            <a href="/login" class="col-3 btn btn-primary"> Login</a>
+            <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+        </div>
+    </main>
 
-<%- include('partials/footer') -%>
+
+
+    <body>
+        <section class="orderContainer">
+            <div class="mt-5">
+                <h2>Make an Order</h2>
+                <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                        <select name="coffeeTemp" id="coffee-select">
+                            <option value="drinkTemp">--Hot or Iced--</option>
+
+
+                            <option value="hot">
+                                Hot
+                            </option>
+                            <option value="iced">
+                                Iced
+                            </option>
+                        </select>
+
+                        <fieldset>
+                            <legend>Select a Drink:</legend>
+
+                            <div>
+                                <input type="radio" id="black" name="customerDrink" value="Black" checked>
+                                <label for="black">Black</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="latte" name="customerDrink" value="Latte">
+                                <label for="latte">Latte</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="cappuccino" name="customerDrink" value="Cappuccino">
+                                <label for="cappuccino">Cappuccino</label>
+                            </div>
+                        </fieldset>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+                </form>
+            </div>
+        </section>
+
+    </body>
+
+
+
+
+
+    <%- include('partials/footer') -%>

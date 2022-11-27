@@ -1,0 +1,44 @@
+
+
+
+
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+     background-image: url(/imgs/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mb-3{
+    align-self: center;
+    /* stops the name input from being super long */
+}
+
+.orderContainer{
+    text-align: center;
+  width: 25%;
+  background: gray;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.pendingOrders{
+    background: gray;
+}
+
+.completedOrders{
+    background: pink;
+    margin-top: 5px;
+}
+
+*{
+    border-radius: 5px;
+}

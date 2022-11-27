@@ -35,33 +35,30 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path)
-
       await Post.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        likes: 0,
-        user: req.user.id,
+        Name: req.body.name, //the name on the order from the front end
+        CoffeeTemp: req.body.coffeeTemp, //iced or hot
+        Drink: req.body.customerDrink, // Black, Latte, Cappuccino
       });
       console.log("Post has been added!");
-      res.redirect("/profile");
+      res.redirect("/");
     } catch (err) {
       console.log(err);
     }
   },
-  likePost: async (req, res) => {
+  likePost: async (req, res) => { //this is what were using to compete the order for now
     try {
       await Post.findOneAndUpdate(
         { _id: req.params.id },
         {
-          $inc: { likes: 1 },
+          $set: { completed: true } //order has been completed
         }
       );
-      console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      // const barista = await db.users.find({ user: req.user.id });
+      // console.log("This is the barista that completed the order", barista);
+
+      console.log("Task Completed!");
+      res.redirect(`/feed`);
     } catch (err) {
       console.log(err);
     }
@@ -69,15 +66,15 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      //let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      //await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile");
+      res.redirect("/feed");
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect("/feed");
     }
   },
 };
